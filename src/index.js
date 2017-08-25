@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
-
 import SearchBar from './components/searchBar';
+import VideoList from './components/videoList';
+import VideoDetail from './components/videoDetail'
 
 const lame = require('../lame.js');
 
@@ -12,9 +13,9 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { vieos: [] };
+        this.state = { videos: [] };
 
-        YTSearch({  key: API_KEY, term: 'table top' }, (videos) => {
+        YTSearch({ key: API_KEY, term: 'tabletop' }, (videos) => {
             this.setState({ videos });
         });
     }
@@ -22,6 +23,8 @@ class App extends Component {
         return (
         <div>
             <SearchBar />
+            <VideoDetail video={this.state.videos[0]}/>
+            <VideoList videos={this.state.videos} />
         </div>
         );
     }
